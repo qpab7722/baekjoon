@@ -1,0 +1,82 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.LinkedList;
+
+public class Main {
+    public static void main(String args[])throws IOException {
+      
+      BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+       StringBuilder sb = new StringBuilder();
+     
+     //입력받을 원소의 개수
+      int N = Integer.parseInt(br.readLine());
+      
+   
+      /*
+      //배열 버전
+         //배열에 값 입력
+      int array[] = new int[N];
+      for(int i=0; i<N;i++)
+      array[i]= Integer.parseInt(br.readLine());
+      
+      insertionSort(array);
+      
+        //출력
+     for(int z=0;z<N;z++)
+        sb.append(array[z] + "\n");
+      */
+      
+      //리스트 버전
+      //리스트에 값 입력
+      LinkedList<Integer> list =new LinkedList<Integer>();
+       for(int i=0; i<N;i++)
+        list.add( Integer.parseInt(br.readLine()));
+        
+        insertionSort2(list);
+        
+         for(int z=0;z<N;z++)
+        sb.append(list.get(z) + "\n");
+        
+        
+     System.out.println(sb);
+    }
+    
+    //배열을 이용한 삽입정렬
+    public static void insertionSort(int[] arr){
+        int n = arr.length;
+        int insert=0;
+        for(int i=1;i<n;i++){
+            insert= arr[i];
+            int j= i; // 비교중인 값 , 
+            //j위치의 값이 삽입할 값보다 더 작을때까지 탐색, 크면 한칸씩 밈
+            while(j>0 && insert<arr[j-1]){
+                arr[j]= arr[j-1];
+                j--;
+            }
+              //탐색된 위치에 삽입
+            arr[j]=insert;  
+            
+           
+        }
+        
+    }
+    
+      //리스트를 이용한 삽입정렬
+    public static void insertionSort2(LinkedList<Integer> list){
+        int n = list.size();
+        int insert=0;
+        for(int i=1;i<n;i++){
+           
+            int j= i; // 비교중인 값 , 
+             insert= list.remove(j);
+            //j위치의 값이 삽입할 값보다 더 작을때까지 탐색
+            while(j>0 && insert<list.get(j-1)){
+                j--;
+            }
+            //탐색된 위치에 삽입
+            list.add(j,insert);                  
+        }
+    }
+  
+}
