@@ -1,0 +1,48 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+
+public class Main {
+    public static void main(String args[])throws IOException {
+      
+      BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+       StringBuilder sb = new StringBuilder();
+     
+     //입력받을 원소의 개수
+      int N = Integer.parseInt(br.readLine());
+      
+      //배열에 값 입력
+      int array[] = new int[N];
+      for(int i=0; i<N;i++)
+      array[i]= Integer.parseInt(br.readLine());
+      
+      //거품 정렬 실행
+     bubbleSort(array);
+     
+     //출력
+     for(int z=0;z<N;z++)
+        sb.append(array[z] + "\n");
+     System.out.println(sb);
+    }
+    
+    
+    public static void bubbleSort(int[] arr){
+        int n = arr.length;
+        // n부터 결정된 위치를 제외하고 반복                                                                                                 
+        for(int j=n-1;j>=0;j--){
+            //인접한 두 원소 비교
+            for(int i=0;i<j;i++){
+             if(arr[i]>arr[i+1]){
+                swap(arr,i,i+1);
+                }
+             }
+        }
+    }
+    
+    public static void swap(int arr[],int a, int b){
+        int temp=0;
+        temp=arr[a];
+        arr[a]=arr[b];
+        arr[b]=temp;
+    }
+}
