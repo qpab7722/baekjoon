@@ -1,0 +1,73 @@
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Stack;
+
+public class Main {
+    
+     static int M;
+      static int N;
+     static int array[][];
+     static int visited[][];
+  
+    public static void main(String args[]) {
+      
+      Scanner sc= new Scanner(System.in);
+     
+     
+      int T = sc.nextInt();
+      int cnt=0;
+      while(T>0){
+         M =sc.nextInt();
+         N =sc.nextInt();
+        int K =sc.nextInt();
+  
+        array = new int[N][M];
+        visited = new int[N][M];
+        for(int[] r:array)
+        Arrays.fill(r,0);
+        
+         for(int[] r:visited)
+        Arrays.fill(r,0);
+        
+        int z=0;
+        while(z<K){
+             int X=sc.nextInt();
+             int Y=sc.nextInt();
+            array[Y][X]=1;
+            z++;
+        }
+        cnt=0;
+     
+        for(int i=0;i<N;i++){
+            for(int j=0;j<M;j++){
+                if(visited[i][j]==0 && array[i][j]==1){
+                    cnt++;
+                    visited[i][j]=1;
+                    dfs(i,j);
+                }
+            }
+        }
+        System.out.println(cnt);
+        
+          T--;
+      }
+    }
+    
+    public static void dfs(int cy, int cx){
+        
+        //주변검사
+        int dx[] ={0,0,1,-1};
+        int dy[] ={1,-1,0,0};
+        for(int i=0;i<4;i++){
+            int nx= cx+dx[i];
+            int ny= cy+dy[i];
+            if(nx>M-1|| ny>N-1 || nx<0 || ny<0)
+                continue;
+            if(visited[ny][nx]==0 && array[ny][nx]==1){
+                visited[ny][nx]=1;
+                dfs(ny,nx);
+            }
+        }
+    }
+  
+}
