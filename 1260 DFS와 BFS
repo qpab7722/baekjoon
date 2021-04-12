@@ -1,0 +1,94 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+import java.util.Stack;
+import java.util.StringTokenizer;
+
+public class Main {
+	
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		
+		Scanner sc = new Scanner(System.in);
+		n = sc.nextInt();
+		 m = sc.nextInt();
+		 v = sc.nextInt();
+
+		//BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		try {
+			for(int k= 0; k<m; k++) {
+				//StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+					//int i = Integer.parseInt(st.nextToken());
+					//int j = Integer.parseInt(st.nextToken());	
+				
+				int i = sc.nextInt();
+				int j = sc.nextInt();	
+				
+					arr[i][j]=1;
+					arr[j][i]=1;
+			}		
+		} catch (Exception e) {
+		
+		}
+		
+		
+		s.push(v);
+		DFS();
+		System.out.println(d_result);
+		
+		q.add(v);
+		BFS();
+		System.out.println(b_result);
+		
+	}
+	
+	static int[][] arr = new int[1001][1001];
+	static int n;
+	static int v;
+	static int m;
+	
+	//dfs
+	static int d_check[]= new int[1001];
+	static String d_result="";
+	static Stack<Integer> s = new Stack<Integer>();
+	
+	static int b_check[]= new int[1001];
+	static String b_result="";
+	static Queue<Integer> q = new LinkedList<Integer>();
+	
+	public static void DFS() {
+		
+		while(!s.empty()) {
+			int node= s.pop();
+			d_check[node]=1;
+			d_result+=node+" ";
+			for(int i=1; i<=n;i++) {
+				if(arr[node][i]==1 && d_check[i]!=1) {
+					s.push(i);
+					d_check[i]=1;
+					DFS();
+				}
+			}			
+		}	
+	}
+	
+	public static void BFS() {
+		while(!q.isEmpty()) {
+			int node= q.poll();
+			b_check[node]=1;
+			b_result+=node+" ";
+			for(int i=1; i<=n;i++) {
+				if(arr[node][i]==1 && b_check[i]!=1) {
+					q.add(i);
+					b_check[i]=1;
+				}
+			}
+		}
+	}
+	
+	
+}
