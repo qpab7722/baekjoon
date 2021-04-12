@@ -1,0 +1,53 @@
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+
+public class Main {
+	static int[][] arr = new int[101][101];
+	static int n;
+	static int m;
+	
+	
+	static int b_check[]= new int[1001];
+	static  int cnt=0;
+	static Queue<Integer> q = new LinkedList<Integer>();
+	
+	
+	public static void BFS() {
+		while(!q.isEmpty()) {
+			int node= q.poll();
+			b_check[node]=1;
+			for(int i=1; i<=n;i++) {
+				if(arr[node][i]==1 && b_check[i]!=1) {
+					cnt++;
+					q.add(i);
+					b_check[i]=1;
+				}
+			}
+		}
+	}
+	
+	public static void main(String[] args) throws Exception{
+		// TODO Auto-generated method stub
+		
+		
+		Scanner sc = new Scanner(System.in);
+		n = sc.nextInt();
+		m = sc.nextInt();
+
+		for(int k= 0; k<m; k++) {								
+			int i = sc.nextInt();
+			int j = sc.nextInt();	
+			
+			arr[i][j]=1;
+			arr[j][i]=1;
+		}
+		q.add(1);
+		BFS();
+		
+		System.out.println(cnt);
+		
+	}	
+	
+}
